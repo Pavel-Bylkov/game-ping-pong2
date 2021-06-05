@@ -58,7 +58,11 @@ class Ball(pg.sprite.Sprite):
     
     def collide_rocket(self, rocket):
         if pg.sprite.collide_rect(self, rocket):
-           self.speed_x *= -1
+            self.speed_x *= -1
+            if self.speed_x > 0:
+                self.speed_x += 1
+            else:
+                self.speed_x -= 1
 
 class Button(GameSprite):
     def __init__(self, text, x, y, wight, height, font_color=GREEN, bg_color=BLUE, fsize=40):
@@ -116,6 +120,8 @@ def start():
     racket1.rect.x, racket1.rect.y = WIN_X - 40, 200
     racket2.rect.x, racket2.rect.y = 15, 200
     ball.rect.x, ball.rect.y = 200, 200
+    ball.speed_x = 4
+    ball.speed_y = 4
 
 clock = pg.time.Clock()
 run = True
